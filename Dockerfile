@@ -14,7 +14,9 @@ COPY poetry.lock $APP_HW/poetry.lock
 
 # Встановимо залежності всередині контейнера
 RUN pip install poetry
-RUN poetry config virtualenvs.create false $$ poetry install --only main
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-root --no-dev --no-interaction --no-ansi --no-progress --no-suggest --no-experimental --only main
+
 
 # Скопіюємо інші файли в робочу директорію контейнера
 COPY . .

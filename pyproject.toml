@@ -1,12 +1,13 @@
 [tool.poetry]
-name = "poetry-req"
+name = "hw1poetry"
 version = "0.1.0"
-description = "Poetry requirements for goit hw8"
+description = "Poetry hw1 for goit"
 authors = ["eughappy <degai7454@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
+poetry = "^1.8.2"
 
 
 [build-system]
