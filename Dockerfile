@@ -1,6 +1,6 @@
 # Docker-команда FROM вказує базовий образ контейнера
 # Наш базовий образ - це Linux з попередньо встановленим python-3.10
-FROM python:3.12-slim
+FROM python:3.12
 
 # Встановимо змінну середовища
 ENV APP_HW /hw2
@@ -9,14 +9,12 @@ ENV APP_HW /hw2
 WORKDIR $APP_HW
 
 # Встановимо залежності всередині контейнера
-COPY pyproject.toml $APP_HW/pyproject.toml
-COPY poetry.lock $APP_HW/poetry.lock
+COPY pyproject.toml poetry.lock $APP_HW/
 
-# Встановимо залежності всередині контейнера
-RUN pip install poetry
-RUN poetry config virtualenvs.create false \
-    && poetry install --no-root --no-dev --no-interaction --no-ansi --no-progress --no-suggest --no-experimental --only main
-
+# Встановимо poetry та залежності всередині контейнера
+RUN pip install poetry && \
+    poetry config virtualenvs.create false && \
+    poetry install --no-dev --no-interaction --no-ansi
 
 # Скопіюємо інші файли в робочу директорію контейнера
 COPY . .
